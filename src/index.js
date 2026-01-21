@@ -1128,16 +1128,6 @@ function serveDashboard() {
       </div>
     </div>
 
-    <!-- Urgency Bar Chart -->
-    <div class="card" style="margin-bottom: 2rem;">
-      <div class="card-header">
-        <h2 class="card-title">📊 Priority/Urgency Breakdown</h2>
-      </div>
-      <div class="chart-container">
-        <canvas id="urgencyBarChart"></canvas>
-      </div>
-    </div>
-
     <!-- Main Dashboard Grid -->
     <div class="main-grid">
       <!-- Sentiment Trend Chart -->
@@ -1261,7 +1251,6 @@ function serveDashboard() {
     let urgencyPieChart = null;
     let valuePieChart = null;
     let themePieChart = null;
-    let urgencyBarChart = null;
     let modalTrendChart = null;
 
     // Chart.js default settings
@@ -1294,7 +1283,6 @@ function serveDashboard() {
         renderUrgencyPie(data.urgency);
         renderValuePie(data.value);
         renderThemePie(data.theme);
-        renderUrgencyBar(data.urgency);
       } catch (error) {
         console.error('Error loading distributions:', error);
       }
@@ -1433,52 +1421,6 @@ function serveDashboard() {
             legend: {
               position: 'bottom',
               labels: { padding: 10, usePointStyle: true, font: { size: 10 } }
-            }
-          }
-        }
-      });
-    }
-
-    function renderUrgencyBar(data) {
-      const ctx = document.getElementById('urgencyBarChart').getContext('2d');
-      if (urgencyBarChart) urgencyBarChart.destroy();
-      
-      const colors = {
-        'critical': '#dc2626',
-        'high': '#f97316',
-        'medium': '#eab308',
-        'low': '#22c55e'
-      };
-      
-      const order = ['critical', 'high', 'medium', 'low'];
-      const sorted = order.map(u => data.find(d => d.urgency === u)).filter(Boolean);
-      
-      urgencyBarChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: sorted.map(d => d.urgency.charAt(0).toUpperCase() + d.urgency.slice(1)),
-          datasets: [{
-            label: 'Feedback Count',
-            data: sorted.map(d => d.count),
-            backgroundColor: sorted.map(d => colors[d.urgency]),
-            borderRadius: 8
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          indexAxis: 'y',
-          plugins: {
-            legend: { display: false }
-          },
-          scales: {
-            x: {
-              grid: { color: '#2a2a3a' },
-              ticks: { color: '#8888a0' }
-            },
-            y: {
-              grid: { display: false },
-              ticks: { color: '#8888a0' }
             }
           }
         }
