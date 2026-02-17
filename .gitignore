@@ -26,4 +26,5 @@ npm-debug.log*
 
 # Build outputs
 dist/
-build/
+build/*.zip
+drive-download*
