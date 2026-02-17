@@ -1,0 +1,21 @@
+# SignalFlow - Product Feedback Intelligence
+# Cloudflare Workers Configuration
+
+name = "signalflow"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+# D1 Database for storing feedback data
+[[d1_databases]]
+binding = "DB"
+database_name = "signalflow-db"
+database_id = "f218b871-e846-48fa-8b77-1e80da02bc4a"
+
+# Workers AI for sentiment and theme analysis
+[ai]
+binding = "AI"
+
+# KV Namespace for caching dashboard data
+[[kv_namespaces]]
+binding = "CACHE"
+id = "0a5605e6a9944a9ba917f6ee2af8c1d7"

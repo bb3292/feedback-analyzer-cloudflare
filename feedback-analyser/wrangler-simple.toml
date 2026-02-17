@@ -1,0 +1,11 @@
+name = "signalflow"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "signalflow-db"
+database_id = "f218b871-e846-48fa-8b77-1e80da02bc4a"
+
+[ai]
+binding = "AI"
